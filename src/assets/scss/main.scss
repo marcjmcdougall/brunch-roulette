@@ -125,11 +125,9 @@ body{
 	// Styles for all links.
 	a{
 
-		color: $accent;
-
 		&:hover{
 
-			color: $black;
+			color: $accent;
 			text-decoration: none;
 		}
 	}
@@ -158,6 +156,15 @@ body{
 		font-family: $h1-font-stack;
 		font-size: 2.5rem;
 		margin: 0.67em 0;
+
+		// Helper class for larger h1 fonts when needed.
+		&.hero{
+
+			font-size: 3.5rem;
+			line-height: 3.5rem;
+
+			margin-bottom: 0.3em;
+		}
 	}
 
 	h2, .h2{
@@ -265,15 +272,76 @@ body{
 
 	.button{
 
-		// Coming soon.
+		display: inline-block;
+		min-width: 200px;
+
+		height: 50px;
+		line-height: 50px;
+
+		text-align: center;
+		text-decoration: none;
+
+		font-family: $h1-font-stack;
+		font-weight: bold;
+		font-size: 18px;
+
+		border-radius: 25px;
+
+		background-color: $accent;
+
+		// Transition box shadows, tranforms, colors, and background colors.
+		transition: transform $standard-transition-duration, box-shadow $standard-transition-duration, color $standard-transition-duration, background-color $standard-transition-duration;
+
+		svg{
+
+			margin-left: 5px;
+		}
+
+		&:hover{
+
+			color: $white;
+		}
+
+		// Special button that floats when you hover over it.
+		&.hover-button{
+
+			margin-top: 10px;
+
+			&:hover{
+
+				transform: translateY(-2px);
+				box-shadow: $standard-box-shadow;
+			}
+		}
+
+		// The special CTA button on the site.
+		&.cta-button{
+
+			background-color: $complement;
+		}
 	}
 }
 
 
-// Special Class #1
+// Location Widget
 // ==========
 
-// Coming soon.
+.location-widget{
+
+	position: absolute;
+	right: 0px;
+
+	min-width: 250px !important;
+
+	background-color: $accent;
+
+	svg{
+
+		position: absolute;
+		right: 0px;
+
+	}
+}
 
 
 
@@ -307,11 +375,32 @@ nav.navbar{
 	a{
 
 		text-decoration: none;
+		line-height: 50px;
 		color: $white;
 
-		&:not(.branding){
+		margin: 0px;
 
-			text-decoration: underline;
+		&.branding{
+
+			svg{
+
+				margin-right: 10px;
+			}
+		}
+
+		&.button{
+
+			float: right;
+			padding: 0 25px;
+
+			opacity: 0.8;
+
+			transition: opacity $standard-transition-duration;
+
+			&:hover{
+
+				opacity: 1.0;
+			}
 		}
 
 		&:hover{
@@ -364,5 +453,12 @@ nav.navbar{
 
 #app.home{
 
+	#main{
 
+		a.cta-button{
+
+			// Adds a special margin to the primary CTA on the homepage.
+			margin-top: 80px;
+		}
+	}
 }

@@ -1,0 +1,27 @@
+{
+  "name": "basic-bootstrap",
+  "version": "1.0.0",
+  "description": "A simple starter project that uses Bootstrap 4, jQuery, FontAwesome, BrowserSync, and Gulp for live-reload and basic task management.",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-ejs": "^3.1.2",
+    "gulp-sass": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcjmcdougall/kbs-plugins/tree/master/starter-templates/basic-bootstrap-4.git"
+  },
+  "author": "Kilobyte Studios",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcjmcdougall/kbs-plugins/issues"
+  },
+  "homepage": "https://github.com/marcjmcdougall/kbs-plugins/tree/master/starter-templates/basic-bootstrap-4#readme"
+}

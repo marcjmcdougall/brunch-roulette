@@ -1,0 +1,96 @@
+* {
+  color: #333; }
+
+body {
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizelegibility !important;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-color: #FFFFFF;
+  font-family: "Lora", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333; }
+  body p, body .p {
+    font-family: "Lora", sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.8; }
+  body a {
+    color: #1768AC; }
+    body a:hover {
+      color: #333;
+      text-decoration: none; }
+  body img, body video {
+    max-width: 100%; }
+  body svg {
+    color: #1768AC; }
+  body h1, body h2, body h3, body h4, body h5, body h6 {
+    font-weight: bold; }
+  body h1, body .h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 2.5rem;
+    margin: 0.67em 0; }
+  body h2, body .h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 2rem;
+    margin: 0.83em 0; }
+  body h3, body .h3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.375rem;
+    margin: 1em 0; }
+  body h4, body .h4 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.125rem;
+    margin: 1.33em 0; }
+  body h5, body .h5 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    margin: 1.67em 0; }
+  body h6, body .h6 {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.875rem;
+    margin: 2.33em 0; }
+  body .accent {
+    color: #1768AC; }
+    body .accent:hover {
+      color: #1768AC; }
+  body .accent-bg {
+    background-color: #1768AC; }
+  body .danger {
+    color: #ff6462; }
+  body .danger-bg {
+    background-color: #ff6462; }
+  body .opaque {
+    opacity: 0.6; }
+  body .readability-normalize {
+    max-width: 650px; }
+
+.container {
+  max-width: 1120px; }
+
+#main {
+  margin-top: 175px; }
+
+nav.navbar {
+  font-family: "Roboto", sans-serif;
+  padding-top: 25px; }
+  nav.navbar a {
+    text-decoration: none;
+    color: #333; }
+    nav.navbar a:not(.branding) {
+      text-decoration: underline; }
+    nav.navbar a:hover {
+      color: #1768AC; }
+  nav.navbar ul.navigation {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: right; }
+    nav.navbar ul.navigation li {
+      display: inline-block; }
+      nav.navbar ul.navigation li:not(:last-child) {
+        margin-right: 25px; }

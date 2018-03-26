@@ -1,0 +1,333 @@
+// ==========
+// Variables
+// ==========
+
+
+// Fonts
+// ==========
+
+// Used for header text.
+$h1-font-stack: "Roboto", sans-serif;
+$h2-font-stack: "Roboto", sans-serif;
+$h3-font-stack: "Roboto", sans-serif;
+$h4-font-stack: "Roboto", sans-serif;
+$h5-font-stack: "Roboto", sans-serif;
+$h6-font-stack: "Roboto", sans-serif;
+
+// Used for body text.
+$body-font-stack: "Lora", sans-serif;
+
+
+// Colors
+// ==========
+
+// Standard colors for text and backgrounds.
+$white: #FFFFFF;
+$black: #333;
+$gray: #f5f5f5;
+
+// Special colors.
+$accent: #1768AC;
+$danger: #ff6462;
+$warning: #ffe066;
+
+
+// Magic Numbers (Layout and Style Defaults)
+// ==========
+
+// Standardized container width.
+$container-width: 1120px;
+
+// Breakpoints.
+$desktop-breakpoint: 1200px;
+$large-tablet-breakpoint: 992px;
+$tablet-breakpoint: 768px;
+$phone-breakpoint: 576px;
+
+// Keep box shadows standard when using them.
+$standard-box-shadow: 1px 2px 20px 0px rgba(0, 0, 0, 0.2);
+
+// Simple animation duration controller.
+$standard-transition-duration: 0.5s;
+
+// Baseline font and line-height.
+$baseline-font-size: 14px;
+$baseline-line-height: 1.5;  // Changed the line-height here as designers specs made it very hard to read body text.
+
+
+
+// ==========
+// Mixins
+// ==========
+
+// Adds a fix for very old firefox browsers that allow content to break out of their parent containers.
+@mixin moz-border-box-fix{
+
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+
+// ==========
+// Global Styles
+// ==========
+
+*{
+
+	// Overrides the SimpleGrid color attribute.
+	color: $black;
+}
+
+body{
+
+	// Optimize legibility for retina devices.
+	-webkit-font-smoothing: antialiased !important;
+   	text-rendering: optimizelegibility !important;
+
+	// Force normal sizing rules.
+	box-sizing: border-box;
+	@include moz-border-box-fix;
+
+	// Anchor the content container to the top left.
+	position: relative;
+	top: 0px;
+	left: 0px;
+
+	// Background color for the site.
+	background-color: $white;
+
+	// Fallback font.
+	font-family: $body-font-stack;
+
+	// Baseline font size and line height.
+	font-size: $baseline-font-size;
+	line-height: $baseline-line-height;
+
+	// Primary text color.
+	color: $black;
+
+	p, .p{
+
+		// Fallback font.
+		font-family: $body-font-stack;
+
+		// Body text is slightly larger than baseline.
+		font-size: 1.125rem;
+		line-height: 1.8;
+	}
+
+	// Styles for all links.
+	a{
+
+		color: $accent;
+
+		&:hover{
+
+			color: $black;
+			text-decoration: none;
+		}
+	}
+
+	// Make all image and video elements responsive naturally.
+	img, video{	
+
+		max-width: 100%;
+	}
+
+	// Colors all FontAwesome icons.
+	svg{
+
+		color: $accent;
+	}
+	
+	// Site header styles.
+	h1, h2, h3, h4, h5, h6{
+
+		font-weight: bold;
+	}
+
+	// Header sizing specifications as per design (sizing specified in pt, I changed to px).
+	h1, .h1{
+
+		font-family: $h1-font-stack;
+		font-size: 2.5rem;
+		margin: 0.67em 0;
+	}
+
+	h2, .h2{
+
+		font-family: $h2-font-stack;
+		font-size: 2rem;
+		margin: 0.83em 0;
+	}
+
+	h3, .h3{
+
+		font-family: $h3-font-stack;
+		font-size: 1.375rem;
+		margin: 1em 0;
+	}
+
+	h4, .h4{
+
+		font-family: $h4-font-stack;
+		font-size: 1.125rem;
+		margin: 1.33em 0;
+	}
+
+	h5, .h5{
+
+		font-family: $h5-font-stack;
+		font-size: 1rem;
+		margin: 1.67em 0;
+	}
+
+	h6, .h6{
+
+		font-family: $h6-font-stack;
+		font-size: 0.875rem;
+		margin: 2.33em 0;
+	}
+
+	
+	// Helper classes.
+	// =====
+
+	.accent{
+
+		color: $accent;
+
+		&:hover{
+
+			color: $accent;
+		}
+	}
+
+	.accent-bg{
+
+		background-color: $accent;
+	}
+
+	.danger{
+
+		color: $danger;
+	}
+
+	.danger-bg{
+
+		background-color: $danger;
+	}
+
+	.opaque{
+
+		opacity: 0.6;
+	}
+
+	// Restricts the width of a container if it contains body text of sorts.
+	.readability-normalize{
+
+		max-width: 650px;
+	}
+
+
+	// Buttons
+	// ==========
+
+	.button{
+
+		// Coming soon.
+	}
+}
+
+
+
+// ==========
+// Layout Styles
+// ==========
+
+// Controls the SimpleGrid container width.
+.container{
+
+	max-width: $container-width;
+}
+
+#main{
+
+	margin-top: 175px;
+}
+
+
+
+// ==========
+// Navigation Styles
+// ==========
+
+nav.navbar{
+
+	font-family: $h1-font-stack;
+
+	padding-top: 25px;
+
+	a{
+
+		text-decoration: none;
+		color: $black;
+
+		&:not(.branding){
+
+			text-decoration: underline;
+		}
+
+		&:hover{
+
+			color: $accent;
+		}
+	}
+
+	ul.navigation{
+
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+
+		text-align: right;
+
+		li{
+
+			display: inline-block;
+
+			&:not(:last-child){
+
+				margin-right: 25px;
+			}
+		}
+	}
+}
+
+
+
+// ==========
+// Theming 
+// ==========
+
+// Coming soon.
+
+
+
+// ==========
+// Component Styles
+// ==========
+
+// Coming soon.
+
+
+
+// ==========
+// Homepage Styles
+// ==========
+
+#app.home{
+
+
+}

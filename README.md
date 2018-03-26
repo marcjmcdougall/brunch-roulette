@@ -1,8 +1,6 @@
-# basic-vue
-A simple starter project that uses VueJS, SimpleGrid.io, SASS, FontAwesome, BrowserSync, and Gulp for live-reload and basic task management.
+# brunch-roulette
+A simple, sexy tool that let's you find local brunch spots in a single click.
 
-
-**Note:** Unless you are making changes to the starter template itself, it is reccomended that you clone this repo, then copy it into a new directory for your project.
 
 ***
 ### How to use...

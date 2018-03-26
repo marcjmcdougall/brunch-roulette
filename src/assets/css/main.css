@@ -141,6 +141,8 @@ nav.navbar {
       nav.navbar a.branding svg {
         margin-right: 10px;
         color: #FBD14B; }
+      nav.navbar a.branding:hover {
+        color: #FBD14B; }
     nav.navbar a.button {
       float: right;
       padding: 0 25px;

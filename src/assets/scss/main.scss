@@ -31,7 +31,7 @@ $accent: #6A60A9;
 $accent-light: #DEDCEE;
 $complement: #FBD14B;
 
-$accent-gradient: linear-gradient(bottom right, #6a60a9, #ce9ffc);
+$accent-gradient: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8));
 
 $danger: #D0414D;
 $warning: #ffe066;
@@ -78,12 +78,6 @@ $baseline-line-height: 1.5;  // Changed the line-height here as designers specs 
 // Global Styles
 // ==========
 
-*{
-
-	// Overrides the SimpleGrid color & font attribute.
-	color: $white;
-}
-
 body{
 
 	// Optimize legibility for retina devices.
@@ -100,7 +94,9 @@ body{
 	left: 0px;
 
 	// Background color for the site.
-	background: $accent-gradient;
+	background: $accent-gradient, url('../img/food-mosaic.jpg');
+	background-size: cover;
+	background-position: center;
 
 	// Fallback font.
 	font-family: $body-font-stack;
@@ -125,6 +121,8 @@ body{
 	// Styles for all links.
 	a{
 
+		color: $white;
+
 		&:hover{
 
 			color: $accent;
@@ -141,7 +139,7 @@ body{
 	// Colors all FontAwesome icons.
 	svg{
 
-		color: $accent;
+		// Omitted.
 	}
 	
 	// Site header styles.

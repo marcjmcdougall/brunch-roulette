@@ -22,13 +22,18 @@ $body-font-stack: "Lora", sans-serif;
 // ==========
 
 // Standard colors for text and backgrounds.
-$white: #FFFFFF;
-$black: #333;
+$white: #FFFCF0;
+$black: #464655;
 $gray: #f5f5f5;
 
 // Special colors.
-$accent: #1768AC;
-$danger: #ff6462;
+$accent: #6A60A9;
+$accent-light: #DEDCEE;
+$complement: #FBD14B;
+
+$accent-gradient: linear-gradient(bottom right, #6a60a9, #ce9ffc);
+
+$danger: #D0414D;
 $warning: #ffe066;
 
 
@@ -76,7 +81,7 @@ $baseline-line-height: 1.5;  // Changed the line-height here as designers specs 
 *{
 
 	// Overrides the SimpleGrid color attribute.
-	color: $black;
+	color: $white;
 }
 
 body{
@@ -95,7 +100,7 @@ body{
 	left: 0px;
 
 	// Background color for the site.
-	background-color: $white;
+	background: $accent-gradient;
 
 	// Fallback font.
 	font-family: $body-font-stack;
@@ -105,7 +110,7 @@ body{
 	line-height: $baseline-line-height;
 
 	// Primary text color.
-	color: $black;
+	color: $white;
 
 	p, .p{
 

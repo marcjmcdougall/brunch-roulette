@@ -80,7 +80,7 @@ $baseline-line-height: 1.5;  // Changed the line-height here as designers specs 
 
 *{
 
-	// Overrides the SimpleGrid color attribute.
+	// Overrides the SimpleGrid color & font attribute.
 	color: $white;
 }
 
@@ -235,6 +235,30 @@ body{
 		max-width: 650px;
 	}
 
+	.fancy-highlight{
+
+		position: relative;
+
+		&::before{
+
+			content: '';
+
+			position: absolute;
+			left: 0px;
+			bottom: 15px;
+
+			z-index: -1;
+
+			height: 22px;
+			width: 100%;
+
+			border-radius: 5px;
+
+			background-color: $complement;
+			opacity: 0.8;
+		}
+	}
+
 
 	// Buttons
 	// ==========
@@ -283,7 +307,7 @@ nav.navbar{
 	a{
 
 		text-decoration: none;
-		color: $black;
+		color: $white;
 
 		&:not(.branding){
 
@@ -292,7 +316,7 @@ nav.navbar{
 
 		&:hover{
 
-			color: $accent;
+			color: $white;
 		}
 	}
 

@@ -94,7 +94,7 @@ body{
 	left: 0px;
 
 	// Background color for the site.
-	background: $accent-gradient, url('../img/food-mosaic.jpg');
+	background: $accent-gradient, url('../img/food-mosaic-blurred.jpg');
 	background-size: cover;
 	background-position: center;
 
@@ -380,9 +380,12 @@ nav.navbar{
 
 		&.branding{
 
+			font-weight: bold;
+
 			svg{
 
 				margin-right: 10px;
+				color: $complement;
 			}
 		}
 

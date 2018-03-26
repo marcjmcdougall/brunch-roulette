@@ -7,8 +7,8 @@ body {
   position: relative;
   top: 0px;
   left: 0px;
-  background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/food-mosaic.jpg");
-  background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/food-mosaic.jpg");
+  background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/food-mosaic-blurred.jpg");
+  background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/food-mosaic-blurred.jpg");
   background-size: cover;
   background-position: center;
   font-family: "Open Sans", sans-serif;
@@ -136,8 +136,11 @@ nav.navbar {
     line-height: 50px;
     color: #FFFCF0;
     margin: 0px; }
-    nav.navbar a.branding svg {
-      margin-right: 10px; }
+    nav.navbar a.branding {
+      font-weight: bold; }
+      nav.navbar a.branding svg {
+        margin-right: 10px;
+        color: #FBD14B; }
     nav.navbar a.button {
       float: right;
       padding: 0 25px;

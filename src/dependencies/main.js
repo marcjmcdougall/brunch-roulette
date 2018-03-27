@@ -16,12 +16,25 @@ var app = new Vue({
 	data: {
 
 		status: 'ready',
-		locations: []
+		position: null,
+		locations: [],
 	},
 	created: function(){
 
 		console.log('Ready.');
 
+		// Configure Geolocator.
+		// Documentation Here: https://github.com/onury/geolocator
+		geolocator.config({
+
+	        language: "en",
+	        google: {
+
+	            key: "AIzaSyDiTvLXRIuCHTlTQimnBzgv1gQ0yCdd2B4"
+	        }
+	    });
+
+	    prepLocations();
 	},
 	methods: {
 
@@ -46,34 +59,87 @@ var app = new Vue({
 // Prepares a list of the nearby brunch locations.
 function prepLocations(){
 
-	// Documentation Here: https://developers.google.com/places/web-service/search?authuser=1
-	var apiKey = 'AIzaSyD5KokvEpZuhbLRTUwUNoLU27LdTVeo8Ho';
-	var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=33.762480,-84.359116&radius=10000&opennow=true&types=restaurant&keyword=brunch&key=' + apiKey;
+	console.log('Prepping locations now...');
 
-	console.log('Sending request to: ' + url);
+	// Configure the geolocator.
+	var options = {
 
-	this.$http.get(url).then(function(response){
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumWait: 10000,     // max wait time for desired accuracy
+        maximumAge: 10000,          // disable cache
+        addressLookup: true,    // requires Google API key if true
+        desiredAccuracy: 30,    // meters
+        fallbackToIP: true,     // fallback to IP if Geolocation fails or rejected
+    };
 
-		// Success!
-		var results = filterResults(response.body.results);
+    // Locate the user via any method necessary (GPS or IP data).
+    geolocator.locate(options, function (err, location) {
 
-		console.log('\nSEARCH RESULTS');
-		console.log('==============');
+    	// Simple error logging.
+        if (err) return console.log(err);
 
-		results.forEach(function(el){
+        console.log('Location found! Polling Google for nearby brunch spots now...');
+		console.log(location);
 
-			console.log(el.name + ': ' + el.rating);
-		});
+		onLocationFound(location);
+    });
+}
 
-		console.log('\n==============\nRaw (filtered) data:');
-		console.log(results);
+// Handler for what happens when the user's location is found.
+function onLocationFound(location){
 
-		this.locations = results;
+	// Update the model with the coordinate pair for use later.
+	app.position = location;
 
-	}, function(response){
+	// If successful, find all nearby brunch locations at those coordinates.
+    findNearbyBrunchLocations(location.coords);
 
-		// There was some error, so log it.
-		console.log(response);
+}
+
+// Finds all 4-star and up open brunch locations within 5 miles of a given coordinate pair.
+function findNearbyBrunchLocations(position){
+
+	// Create the necessary objects for Google places to consume the request properly.
+	var myLocation = new google.maps.LatLng(position.latitude, position.longitude);
+	var service = new google.maps.places.PlacesService(document.getElementById('gmap-attribution'));
+	var request = {
+
+		location: myLocation,
+		radius: '10000', // Within ~5 miles.
+		type: 'restaurant', // Restaurants only.
+		keyword: 'brunch', // Must be tagged for brunch!
+		opennow: true // Must be open now.
+	}
+
+	console.log('Sending request to Google now...');
+
+	// Perform the nearby search.
+	service.nearbySearch(request, function(results, status, pagination){
+
+		if(status == google.maps.places.PlacesServiceStatus.OK){
+
+			// Success!
+			var filteredResults = filterResults(results);
+
+			console.log('\nSEARCH RESULTS');
+			console.log('==============');
+
+			filteredResults.forEach(function(el){
+
+				console.log(el.name + ': ' + el.rating);
+			});
+
+			console.log('\n==============\nRaw (filtered) data:');
+			console.log(filteredResults);
+
+			app.locations = filteredResults;
+		}
+		else{
+
+			// Failure!
+			console.log('There was an error with the request ' + status);
+		}
 	});
 }
 
@@ -92,3 +158,4 @@ function filterResults(results){
 
 	return output;
 }
+

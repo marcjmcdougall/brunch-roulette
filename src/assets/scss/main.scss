@@ -54,6 +54,7 @@ $standard-box-shadow: 1px 2px 20px 0px rgba(0, 0, 0, 0.2);
 
 // Simple animation duration controller.
 $standard-transition-duration: 0.5s;
+$standard-transition-duration-long: 1.0s;
 
 // Baseline font and line-height.
 $baseline-font-size: 14px;
@@ -73,6 +74,22 @@ $baseline-line-height: 1.5;  // Changed the line-height here as designers specs 
 }
 
 
+
+// ==========
+// Animation
+// ==========
+
+@keyframes rotating {
+
+  from {
+
+    transform: rotate(0deg);
+  }
+  to {
+
+    transform: rotate(360deg);
+  }
+}
 
 // ==========
 // Global Styles
@@ -264,6 +281,11 @@ body{
 		}
 	}
 
+	.rotating{
+
+		animation: rotating 2s linear infinite;
+	}
+
 
 	// Buttons
 	// ==========
@@ -399,13 +421,13 @@ nav.navbar{
 			float: right;
 			padding: 0 25px;
 
-			opacity: 0.8;
+			transition: opacity $standard-transition-duration-long;
 
-			transition: opacity $standard-transition-duration;
+			opacity: 0.4;
 
-			&:hover{
+			&.active{
 
-				opacity: 1.0;
+				opacity: 0.8;
 			}
 		}
 
@@ -465,6 +487,38 @@ nav.navbar{
 
 			// Adds a special margin to the primary CTA on the homepage.
 			margin-top: 80px;
+		}
+
+		#loading-indicator{
+
+			width: 25px;
+			height: 25px;
+
+			border-radius: 15px;
+			border: 2px dotted $white;
+
+			margin-bottom: 5px;
+			margin-right: 10px;
+
+			vertical-align: middle;
+
+			display: inline-block;
+
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity $standard-transition-duration, visibility $standard-transition-duration;
+
+			position: absolute;
+			left: -9999%;
+
+			&.active{
+
+				visibility: visible;
+				opacity: 1;
+
+				position: relative;
+				left: initial;
+			}
 		}
 	}
 }

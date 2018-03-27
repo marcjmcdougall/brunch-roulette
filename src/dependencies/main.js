@@ -17,6 +17,7 @@ var app = new Vue({
 
 		status: 'ready',
 		position: null,
+		spin: false,
 		locations: [],
 	},
 	created: function(){
@@ -38,7 +39,11 @@ var app = new Vue({
 	},
 	methods: {
 
-		prepLocations: prepLocations
+		prepLocations: prepLocations,
+		doSpin : function(){
+
+			this.spin = !this.spin;
+		}
 	}
 
 });

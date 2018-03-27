@@ -114,10 +114,10 @@ body {
     font-size: 18px;
     border-radius: 25px;
     background-color: #6A60A9;
-    -webkit-transition: color 0.5s, background-color 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
-    transition: color 0.5s, background-color 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
-    transition: transform 0.5s, box-shadow 0.5s, color 0.5s, background-color 0.5s;
-    transition: transform 0.5s, box-shadow 0.5s, color 0.5s, background-color 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s; }
+    -webkit-transition: color 0.5s, background-color 0.5s, min-width 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
+    transition: color 0.5s, background-color 0.5s, min-width 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s;
+    transition: transform 0.5s, box-shadow 0.5s, color 0.5s, background-color 0.5s, min-width 0.5s;
+    transition: transform 0.5s, box-shadow 0.5s, color 0.5s, background-color 0.5s, min-width 0.5s, -webkit-transform 0.5s, -webkit-box-shadow 0.5s; }
     body .button svg {
       margin-left: 5px; }
     body .button:hover {
@@ -184,24 +184,26 @@ nav.navbar {
 
 #app.home #main a.cta-button {
   margin-top: 80px; }
+  #app.home #main a.cta-button.active {
+    min-width: 225px; }
+    #app.home #main a.cta-button.active #loading-indicator {
+      visibility: visible;
+      opacity: 1;
+      position: relative;
+      left: initial; }
 
 #app.home #main #loading-indicator {
   width: 25px;
   height: 25px;
   border-radius: 15px;
-  border: 2px dotted #FFFCF0;
+  border: 3px dotted #FFFCF0;
   margin-bottom: 5px;
   margin-right: 10px;
   vertical-align: middle;
   display: inline-block;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.5s, visibility 0.5s;
-  transition: opacity 0.5s, visibility 0.5s;
+  -webkit-transition: opacity 1s, visibility 0.5s;
+  transition: opacity 1s, visibility 0.5s;
   position: absolute;
   left: -9999%; }
-  #app.home #main #loading-indicator.active {
-    visibility: visible;
-    opacity: 1;
-    position: relative;
-    left: initial; }

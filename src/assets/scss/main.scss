@@ -310,7 +310,7 @@ body{
 		background-color: $accent;
 
 		// Transition box shadows, tranforms, colors, and background colors.
-		transition: transform $standard-transition-duration, box-shadow $standard-transition-duration, color $standard-transition-duration, background-color $standard-transition-duration;
+		transition: transform $standard-transition-duration, box-shadow $standard-transition-duration, color $standard-transition-duration, background-color $standard-transition-duration, min-width $standard-transition-duration;
 
 		svg{
 
@@ -487,6 +487,20 @@ nav.navbar{
 
 			// Adds a special margin to the primary CTA on the homepage.
 			margin-top: 80px;
+
+			&.active{
+
+				min-width: 225px;
+
+				#loading-indicator{
+
+					visibility: visible;
+					opacity: 1;
+
+					position: relative;
+					left: initial;
+				}
+			}
 		}
 
 		#loading-indicator{
@@ -495,7 +509,7 @@ nav.navbar{
 			height: 25px;
 
 			border-radius: 15px;
-			border: 2px dotted $white;
+			border: 3px dotted $white;
 
 			margin-bottom: 5px;
 			margin-right: 10px;
@@ -506,19 +520,10 @@ nav.navbar{
 
 			opacity: 0;
 			visibility: hidden;
-			transition: opacity $standard-transition-duration, visibility $standard-transition-duration;
+			transition: opacity $standard-transition-duration-long, visibility $standard-transition-duration;
 
 			position: absolute;
 			left: -9999%;
-
-			&.active{
-
-				visibility: visible;
-				opacity: 1;
-
-				position: relative;
-				left: initial;
-			}
 		}
 	}
 }

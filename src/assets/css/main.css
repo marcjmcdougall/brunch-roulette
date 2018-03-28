@@ -23,10 +23,6 @@ body {
   position: relative;
   top: 0px;
   left: 0px;
-  background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/food-mosaic-blurred.jpg");
-  background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/food-mosaic-blurred.jpg");
-  background-size: cover;
-  background-position: center;
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   line-height: 1.5;
@@ -144,12 +140,17 @@ body {
 .container {
   max-width: 1120px; }
 
-#main {
-  margin-top: 175px; }
+#main .container {
+  padding-top: 250px; }
 
 nav.navbar {
   font-family: "Dosis", sans-serif;
-  padding-top: 25px; }
+  padding-top: 25px;
+  position: absolute;
+  width: 100vw;
+  top: 0px;
+  left: 0px;
+  z-index: 2; }
   nav.navbar a {
     text-decoration: none;
     line-height: 50px;
@@ -182,31 +183,33 @@ nav.navbar {
       nav.navbar ul.navigation li:not(:last-child) {
         margin-right: 25px; }
 
-#app.home #main a.cta-button {
-  margin-top: 80px; }
-  #app.home #main a.cta-button svg {
-    margin-left: 9px;
-    margin-right: 5px; }
-  #app.home #main a.cta-button.active #loading-indicator {
-    visibility: visible;
-    opacity: 1;
-    position: relative;
-    left: initial; }
-  #app.home #main a.cta-button.active svg {
-    display: none; }
-
-#app.home #main #loading-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 15px;
-  border: 3px dotted #FFFCF0;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  vertical-align: middle;
-  display: inline-block;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity 1s, visibility 0.5s;
-  transition: opacity 1s, visibility 0.5s;
-  position: absolute;
-  left: -9999%; }
+#app .home {
+  background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/food-mosaic-blurred.jpg");
+  background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/food-mosaic-blurred.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; }
+  #app .home#main {
+    z-index: 1;
+    position: relative; }
+    #app .home#main a.cta-button {
+      margin-top: 80px; }
+      #app .home#main a.cta-button svg {
+        margin-left: 9px;
+        margin-right: 5px; }
+      #app .home#main a.cta-button.active #loading-indicator {
+        position: relative;
+        left: initial; }
+      #app .home#main a.cta-button.active svg {
+        display: none; }
+    #app .home#main #loading-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 15px;
+      border: 3px dotted #FFFCF0;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      vertical-align: middle;
+      display: inline-block;
+      position: absolute;
+      left: -9999%; }

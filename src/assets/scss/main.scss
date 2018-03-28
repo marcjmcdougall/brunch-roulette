@@ -110,11 +110,6 @@ body{
 	top: 0px;
 	left: 0px;
 
-	// Background color for the site.
-	background: $accent-gradient, url('../img/food-mosaic-blurred.jpg');
-	background-size: cover;
-	background-position: center;
-
 	// Fallback font.
 	font-family: $body-font-stack;
 
@@ -375,9 +370,15 @@ body{
 	max-width: $container-width;
 }
 
-#main{
+#main .container{
 
-	margin-top: 175px;
+	padding-top: 250px;
+}
+
+// A container for each roulette wheel section.
+.section{
+
+
 }
 
 
@@ -391,6 +392,13 @@ nav.navbar{
 	font-family: $h1-font-stack;
 
 	padding-top: 25px;
+	position: absolute;
+
+	width: 100vw;
+	top: 0px;
+	left: 0px;
+
+	z-index: 2;
 
 	a{
 
@@ -479,9 +487,19 @@ nav.navbar{
 // Homepage Styles
 // ==========
 
-#app.home{
+#app .home{
 
-	#main{
+	// Background color for the site.
+	background: $accent-gradient, url('../img/food-mosaic-blurred.jpg');
+	background-size: cover;
+	background-position: center;
+
+	min-height: 100vh;
+
+	&#main{
+
+		z-index: 1;
+		position: relative;
 
 		a.cta-button{
 
@@ -499,9 +517,6 @@ nav.navbar{
 				// min-width: 225px;
 
 				#loading-indicator{
-
-					visibility: visible;
-					opacity: 1;
 
 					position: relative;
 					left: initial;
@@ -529,10 +544,6 @@ nav.navbar{
 			vertical-align: middle;
 
 			display: inline-block;
-
-			opacity: 0;
-			visibility: hidden;
-			transition: opacity $standard-transition-duration-long, visibility $standard-transition-duration;
 
 			position: absolute;
 			left: -9999%;

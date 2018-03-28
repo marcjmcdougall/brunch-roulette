@@ -184,6 +184,9 @@ nav.navbar {
 
 #app.home #main a.cta-button {
   margin-top: 80px; }
+  #app.home #main a.cta-button svg {
+    margin-left: 9px;
+    margin-right: 5px; }
   #app.home #main a.cta-button.active #loading-indicator {
     visibility: visible;
     opacity: 1;

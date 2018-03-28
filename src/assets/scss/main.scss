@@ -488,6 +488,12 @@ nav.navbar{
 			// Adds a special margin to the primary CTA on the homepage.
 			margin-top: 80px;
 
+			svg{
+
+				    margin-left: 9px;
+    				margin-right: 5px;
+			}
+
 			&.active{
 
 				// min-width: 225px;

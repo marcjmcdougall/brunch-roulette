@@ -388,7 +388,7 @@ body{
 
 	&.spin{
 
-		left: -100%;
+		left: calc(-100% - 100px);
 	}
 }
 
@@ -581,7 +581,7 @@ nav.navbar{
 
 	&.spin{
 
-		left: -100%;
+		left: calc(-100% - 100px);
 	}
 }
 

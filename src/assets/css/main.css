@@ -150,7 +150,7 @@ body {
   transition: left 0.5s;
   left: 0px; }
   .section.spin {
-    left: -100%; }
+    left: calc(-100% - 100px); }
 
 nav.navbar {
   font-family: "Dosis", sans-serif;
@@ -231,7 +231,7 @@ nav.navbar {
   -webkit-transition: left 0.5s;
   transition: left 0.5s; }
   #roulette-view.spin {
-    left: -100%; }
+    left: calc(-100% - 100px); }
 
 #app .section.single {
   background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8)));

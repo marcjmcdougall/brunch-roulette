@@ -105,6 +105,9 @@ body{
 	box-sizing: border-box;
 	@include moz-border-box-fix;
 
+	// Adds the nice yellow background to the page.
+	background-color: $complement;
+
 	// Anchor the content container to the top left.
 	position: relative;
 	top: 0px;
@@ -119,6 +122,8 @@ body{
 
 	// Primary text color.
 	color: $white;
+
+	overflow: hidden;
 
 	p, .p{
 
@@ -378,7 +383,13 @@ body{
 // A container for each roulette wheel section.
 .section{
 
+	transition: left $standard-transition-duration;
+	left: 0px;
 
+	&.spin{
+
+		left: -100%;
+	}
 }
 
 
@@ -549,4 +560,43 @@ nav.navbar{
 			left: -9999%;
 		}
 	}
+}
+
+
+// ==========
+// Roulette Wheel Styles
+// ==========
+
+#roulette-view{
+
+	position: relative;
+	left: 0px;
+
+	max-width: 100vw;
+	height: 100vh;
+
+	// overflow: hidden;
+
+	transition: left $standard-transition-duration;
+
+	&.spin{
+
+		left: -100%;
+	}
+}
+
+
+// ==========
+// Single Brunch Sections
+// ==========
+
+#app .section.single{
+
+	background: $accent-gradient;
+	width: 100vw;
+	height: 100vh;
+
+	position: absolute;
+	left: calc(100% + 100px);
+	top: 0px;
 }

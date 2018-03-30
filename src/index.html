@@ -33,20 +33,20 @@
     <div id="app">
 
       <!-- Standard Bootstrap Navbar -->
-      <nav class="navbar">
+      <nav class="navbar fadein" v-bind:class="{active: !spinning}">
 
         <!-- Add a container to the navigation content. -->
         <div class="container">
 
           <div class="row">
 
-            <div class="col-3">
+            <div class="col-6 col-sm">
 
-              <a class="branding h4" href="/"><i class="fas fa-utensils"></i>Brunch Roulette</a>
+              <a class="branding h4" href="/"><i class="fas fa-utensils"></i><span class="text">Brunch Roulette</span></a>
 
             </div>
 
-            <div class="col-9">
+            <div class="col-6 col-sm">
 
               <!-- FontAwesome currently removed as it interferes with reactivity. -->
               <!-- <i class="fas" v-bind:class="{'fa-question': (position === null), 'fa-map-marker-alt': (position != null)}"></i> -->
@@ -71,9 +71,10 @@
               <div class="col-9">
                 
                 <h1 class="hero">We'll pick you a <span class="fancy-highlight">random</span>, 4-star and up <span class="fancy-highlight">brunch</span> spot <span class="fancy-highlight">within 5 miles</span>.</h1>
-                <p>Curabitur aliquet quam id dui posuere blandit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. </p>
+                <p>We get it &mdash; you're hungover out your mind.  Let us do all the thinking and get you to those delicious eggs sooner&hellip; </p>
 
-                <a href="/spin" class="button hover-button cta-button" v-on:click.prevent="doSpin()">Spin the Wheel <div id="loading-indicator" class="rotating" ></div><i aria-hidden="true" class="fas fa-caret-right"></i></a>
+                <a href="/spin" class="button hover-button cta-button" v-on:click.prevent="tryDoSpin()">Spin the Wheel<i aria-hidden="true" class="fas fa-caret-right" v-if="!waiting"></i></a>
+                <p class="notification fadein" v-bind:class="{'active': waiting}"><i id="loading-indicator" class="fas fa-spinner rotating" v-if="waiting"></i>Just a sec &mdash; still fetching nearby brunch spots for you.</p>
 
                 <div id="gmap-attribution"></div>
 
@@ -87,7 +88,7 @@
 
         <div id="roulette-options">
 
-          <div v-for="(location, index) in locations" class="section single" v-bind:style="getLeftOffsetString(index)">
+          <div v-for="(location, index) in locations" class="section single" v-bind:style="[getLeftOffsetValue(index), getSingleBackgroundImage()]">
             
             <div class="container">
 
@@ -95,28 +96,24 @@
 
                 <div class="col-6"> 
 
-                  <p class="tag"><i class="fas fa-tag"></i>American</p>
+                  <a v-bind:href="'https://www.google.com/maps/dir/?api=1&destination=' + location.name + '&destination_place_id=' + location.place_id" target="_blank" rel="noopener" class="tag p"><i class="fas fa-map-marker-alt"></i>{{location.vicinity}}</a>
                   
                   <h2 class="h1 hero"><strong>{{location.name}}</strong></h2>
 
                   <ul class="stars">
                     
-                    <li><i class="fas fa-star"></i></li>
-                    <li><i class="fas fa-star"></i></li>
-                    <li><i class="fas fa-star"></i></li>
-                    <li><i class="fas fa-star"></i></li>
-                    <li><i class="fas fa-star-half"></i></li>
+                    <li v-for="index in Math.floor(location.rating)"><i class="fas fa-star"></i></li><li><i class="fas fa-star-half"></i></li>
 
                   </ul>
 
-                  <p class="review-count">1,677 Reviews</p>
-                  <p>Donec sollicitudin molestie malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
+                  <p class="review-count">{{location.rating}}</p>
+                  <p>Alright, you've been given a brunch spot!  You can either go here, or reroll to get another option.</p>
 
-                  <div class="controls">
+                  <div class="controls fadein" v-bind:class="{active: !spinning}">
                     
-                    <a href="#" class="button cta-button"><i class="fas fa-location-arrow"></i> Navigate</a>
+                    <a v-bind:href="'https://www.google.com/maps/dir/?api=1&destination=' + location.name + '&destination_place_id=' + location.place_id" class="button cta-button" target="_blank" rel="noopener"><i class="fas fa-location-arrow"></i> Navigate</a>
 
-                    <a href="#" target="_blank" rel="noopener"><i class="fas fa-globe"></i>Visit on Google</a>
+                    <a v-bind:href="'https://www.google.com/maps/search/?api=1&query=' + location.name + '&query_place_id=' + location.place_id" target="_blank" rel="noopener"><i class="fas fa-globe"></i>Visit on Google</a>
                     <a href="#" target="_blank" rel="noopener" v-on:click.prevent="doSpin()"><i class="fas fa-sync"></i>Spin Again</a>
 
                   </div>
@@ -125,23 +122,21 @@
 
                 <div class="col-1"></div>
 
-                <div class="col-5">
+                <div class="col-5 fadein" v-bind:class="{active: (location.reviews && !spinning)}">
                   
-                  <p>Popular Dishes</p>
+                  <p>Recent Reviews</p>
 
-                  <div class="dish-container">
+                  <div class="dish-container" >
                     
-                    <div class="dish-item">
+                    <div class="dish-item" v-for="review in location.reviews">
                       
-                      <h3>Steak Sandwich <i class="fas fa-heart"></i></h3>
-                      <p>Donec sollicitudin molestie malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
+                      <h3>{{review.author_name}}</h3>
+                      <ul class="stars">
+                    
+                        <li v-for="index in Math.floor(review.rating)"><i class="fas fa-star"></i></li><li v-if="review.rating < 5"><i class="fas fa-star-half"></i></li>
 
-                    </div>
-
-                    <div class="dish-item">
-                      
-                      <h3>Meatball Sub</h3>
-                      <p>Donec sollicitudin molestie malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
+                      </ul>
+                      <p>{{review.text}}</p>
 
                     </div>
 

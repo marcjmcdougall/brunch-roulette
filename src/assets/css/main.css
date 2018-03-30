@@ -14,6 +14,25 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 
+@-webkit-keyframes blinking {
+  0% {
+    opacity: 0.8; }
+  50% {
+    opacity: 0.2; }
+  100% {
+    opacity: 0.8; } }
+
+@keyframes blinking {
+  0% {
+    opacity: 0.8; }
+  50% {
+    opacity: 0.2; }
+  100% {
+    opacity: 0.8; } }
+
+html, body {
+  overflow: hidden; }
+
 body {
   -webkit-font-smoothing: antialiased !important;
   text-rendering: optimizelegibility !important;
@@ -27,8 +46,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: #FFFCF0;
-  overflow: hidden; }
+  color: #FFFCF0; }
   body p, body .p {
     font-family: "Open Sans", sans-serif;
     font-size: 1.125rem;
@@ -108,6 +126,9 @@ body {
   body .rotating {
     -webkit-animation: rotating 2s linear infinite;
     animation: rotating 2s linear infinite; }
+  body .blinking {
+    -webkit-animation: blinking 2s linear infinite;
+    animation: blinking 2s linear infinite; }
   body ul.stars {
     display: inline-block;
     vertical-align: middle;
@@ -115,9 +136,18 @@ body {
     margin: 0px;
     padding: 0px; }
     body ul.stars li {
-      display: inline-block; }
+      display: inline-block;
+      margin-right: 3px; }
       body ul.stars li svg {
         color: #FBD14B; }
+  body .fadein {
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s; }
+    body .fadein.active {
+      opacity: 0.8;
+      pointer-events: all; }
   body .button {
     display: inline-block;
     min-width: 200px;
@@ -163,6 +193,18 @@ body {
 #main .container {
   padding-top: 250px; }
 
+@media screen and (max-width: 768px) {
+  #main .container {
+    padding-top: 75px; }
+  .row div[class*="col"]:not(.col-sm) {
+    width: 100%;
+    max-width: 100%; } }
+
+@media screen and (max-width: 576px) {
+  .row div[class*="col"] {
+    width: 100%;
+    max-width: 100%; } }
+
 .section {
   -webkit-transition: left 0.5s;
   transition: left 0.5s;
@@ -178,6 +220,8 @@ nav.navbar {
   top: 0px;
   left: 0px;
   z-index: 2; }
+  nav.navbar.active {
+    opacity: 1.0; }
   nav.navbar a {
     text-decoration: none;
     line-height: 50px;
@@ -209,18 +253,34 @@ nav.navbar {
       display: inline-block; }
       nav.navbar ul.navigation li:not(:last-child) {
         margin-right: 25px; }
+  @media screen and (max-width: 576px) {
+    nav.navbar .branding span.text {
+      display: none; } }
 
-.dish-container .dish-item {
-  background-color: #6A60A9;
-  padding: 25px;
-  margin-bottom: 40px;
-  border-radius: 25px;
-  opacity: 0.8; }
-  .dish-container .dish-item h3 {
-    margin-top: 0px; }
-    .dish-container .dish-item h3 svg {
-      color: #FBD14B;
-      margin-left: 10px; }
+.dish-container {
+  overflow: scroll;
+  height: 500px; }
+  .dish-container .dish-item {
+    background-color: #6A60A9;
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+    opacity: 0.8; }
+    .dish-container .dish-item h3 {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      display: inline-block;
+      vertical-align: middle; }
+      .dish-container .dish-item h3 svg {
+        color: #FBD14B;
+        margin-left: 10px; }
+    .dish-container .dish-item ul.stars {
+      vertical-align: middle;
+      margin-left: 20px; }
+  @media screen and (max-width: 768px) {
+    .dish-container {
+      padding-bottom: 100px;
+      height: 300px; } }
 
 #app .home {
   background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/food-mosaic-blurred.jpg");
@@ -236,22 +296,19 @@ nav.navbar {
       #app .home#main a.cta-button svg {
         margin-left: 9px;
         margin-right: 5px; }
-      #app .home#main a.cta-button.active #loading-indicator {
-        position: relative;
-        left: initial; }
-      #app .home#main a.cta-button.active svg {
-        display: none; }
     #app .home#main #loading-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 15px;
-      border: 3px dotted #FFFCF0;
-      margin-bottom: 5px;
-      margin-left: 5px;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
       vertical-align: middle;
+      display: inline-block; }
+    #app .home#main .notification {
       display: inline-block;
-      position: absolute;
-      left: -9999%; }
+      margin-left: 20px;
+      font-size: 1.0rem; }
+  @media screen and (max-width: 576px) {
+    #app .home#main a.cta-button {
+      margin-top: 20px; } }
 
 #roulette-view {
   position: relative;
@@ -268,20 +325,42 @@ nav.navbar {
 #roulette-options .section.single {
   background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/hollandaise.jpg");
   background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/hollandaise.jpg");
-  background-size: cover;
-  background-position: center;
+  background-size: cover !important;
+  background-position: center !important;
   width: 100vw;
   height: 100vh;
   position: absolute;
   left: calc(100% + 100px);
   top: 0px; }
-  #roulette-options .section.single:nth-child(2) {
-    left: calc(200% + 200px); }
+  #roulette-options .section.single:nth-child(1) {
+    background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/eggs.jpg");
+    background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/eggs.jpg"); }
+  #roulette-options .section.single:nth-child(2n) {
+    background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/hollandaise.jpg");
+    background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/hollandaise.jpg"); }
+  #roulette-options .section.single:nth-child(3n) {
+    background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/omelete.jpg");
+    background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/omelete.jpg"); }
+  #roulette-options .section.single:nth-child(4n) {
+    background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/sausages.jpg");
+    background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/sausages.jpg"); }
+  #roulette-options .section.single:nth-child(5n) {
+    background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/strawberries.jpg");
+    background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/strawberries.jpg"); }
+  #roulette-options .section.single:nth-child(6n) {
+    background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/tomatoes.jpg");
+    background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/tomatoes.jpg"); }
   #roulette-options .section.single .container {
     padding-top: 250px; }
     #roulette-options .section.single .container h2.hero {
       margin-bottom: 10px;
       margin-top: 0px; }
+    #roulette-options .section.single .container a.tag {
+      display: block;
+      text-decoration: none;
+      margin-bottom: 10px; }
+      #roulette-options .section.single .container a.tag:hover {
+        color: #FBD14B; }
     #roulette-options .section.single .container .review-count {
       display: inline-block;
       vertical-align: middle;
@@ -300,3 +379,6 @@ nav.navbar {
           #roulette-options .section.single .container .controls a:not(.cta-button):hover {
             color: #FFFCF0;
             opacity: 1.0; }
+  @media screen and (max-width: 768px) {
+    #roulette-options .section.single .container {
+      padding-top: 175px; } }

@@ -78,7 +78,7 @@ $baseline-line-height: 1.5;  // Changed the line-height here as designers specs 
 
 
 // ==========
-// Animation
+// Animations
 // ==========
 
 @keyframes rotating {
@@ -93,9 +93,30 @@ $baseline-line-height: 1.5;  // Changed the line-height here as designers specs 
   }
 }
 
+@keyframes blinking {
+
+  0% {
+
+    opacity: 0.8;
+  }
+  50%{
+
+  	opacity: 0.2;
+  }
+  100% {
+
+    opacity: 0.8;
+  }
+}
+
 // ==========
 // Global Styles
 // ==========
+
+html, body{
+
+	overflow: hidden;
+}
 
 body{
 
@@ -124,8 +145,6 @@ body{
 
 	// Primary text color.
 	color: $white;
-
-	overflow: hidden;
 
 	p, .p{
 
@@ -305,6 +324,12 @@ body{
 		animation: rotating 2s linear infinite;
 	}
 
+	// Helper class that adds a simple blinking effect to text.
+	.blinking{
+
+		animation: blinking 2s linear infinite;
+	}
+
 	// Any review element on the page.
 	ul.stars{	
 
@@ -318,11 +343,26 @@ body{
 		li{
 
 			display: inline-block;
+			margin-right: 3px;
 
 			svg{
 
 				color: $complement;
 			}
+		}
+	}
+
+	.fadein{
+
+		opacity: 0;
+		pointer-events: none;
+
+		transition: opacity $standard-transition-duration;
+
+		&.active{
+
+			opacity: 0.8;
+			pointer-events: all;
 		}
 	}
 
@@ -420,6 +460,29 @@ body{
 	padding-top: 250px;
 }
 
+@media screen and (max-width: $tablet-breakpoint){
+
+	#main .container{
+
+		padding-top: 75px;
+	}
+
+	.row div[class*="col"]:not(.col-sm){
+
+		width: 100%;
+		max-width: 100%;
+	}
+}
+
+@media screen and (max-width: $phone-breakpoint){
+
+	.row div[class*="col"]{
+
+		width: 100%;
+		max-width: 100%;
+	}
+}
+
 // A container for each roulette wheel section.
 .section{
 
@@ -450,6 +513,11 @@ nav.navbar{
 	left: 0px;
 
 	z-index: 2;
+
+	&.active{
+
+		opacity: 1.0;
+	}
 
 	a{
 
@@ -514,6 +582,14 @@ nav.navbar{
 			}
 		}
 	}
+
+	@media screen and (max-width: $phone-breakpoint){
+
+		.branding span.text{
+
+			display: none;
+		}
+	}
 }
 
 
@@ -535,6 +611,9 @@ nav.navbar{
 // ==========
 .dish-container{
 
+	overflow: scroll;
+    height: 500px;
+
 	.dish-item{
 
 		background-color: $accent;
@@ -549,6 +628,9 @@ nav.navbar{
 		h3{
 
 			margin-top: 0px;
+			margin-bottom: 0px;
+			display: inline-block;
+			vertical-align: middle;
 
 			svg{
 
@@ -556,6 +638,19 @@ nav.navbar{
 				margin-left: 10px;
 			}
 		}
+
+		ul.stars{
+
+			// display: inline-block;
+			vertical-align: middle;
+			margin-left: 20px;
+		}
+	}
+
+	@media screen and (max-width: $tablet-breakpoint){
+
+		padding-bottom: 100px;
+		height: 300px;
 	}
 }
 
@@ -587,45 +682,40 @@ nav.navbar{
 
 			svg{
 
-				    margin-left: 9px;
-    				margin-right: 5px;
-			}
-
-			&.active{
-
-				// min-width: 225px;
-
-				#loading-indicator{
-
-					position: relative;
-					left: initial;
-				}
-
-				svg{
-
-					display: none;
-				}
+			    margin-left: 9px;
+				margin-right: 5px;
 			}
 		}
 
 		#loading-indicator{
 
-			width: 10px;
-			height: 10px;
+			width: 20px;
+			height: 20px;
 
-			border-radius: 15px;
-			border: 3px dotted $white;
-
-			margin-bottom: 5px;
-			// margin-right: 10px;
-			margin-left: 5px;
+			margin-right: 10px;
 
 			vertical-align: middle;
 
 			display: inline-block;
+		}
 
-			position: absolute;
-			left: -9999%;
+		.notification{
+
+			display: inline-block;
+			margin-left: 20px;
+
+			font-size: 1.0rem;
+		}
+	}
+
+	@media screen and (max-width: $phone-breakpoint){
+
+		&#main{
+
+			a.cta-button{
+
+				margin-top: 20px;
+			}
 		}
 	}
 }
@@ -665,9 +755,10 @@ nav.navbar{
 
 #roulette-options .section.single{
 
+	// Default background image.
 	background: $accent-gradient, url('../img/hollandaise.jpg');
-	background-size: cover;
-	background-position: center;
+	background-size: cover !important;
+	background-position: center !important;
 
 	width: 100vw;
 	height: 100vh;
@@ -676,9 +767,34 @@ nav.navbar{
 	left: calc(100% + 100px);
 	top: 0px;
 
-	&:nth-child(2){
+	&:nth-child(1){
 
-		left: calc(200% + 200px);
+		background: $accent-gradient, url('../img/eggs.jpg');
+	}
+
+	&:nth-child(2n){
+
+		background: $accent-gradient, url('../img/hollandaise.jpg');
+	}
+
+	&:nth-child(3n){
+
+		background: $accent-gradient, url('../img/omelete.jpg');
+	}
+
+	&:nth-child(4n){
+
+		background: $accent-gradient, url('../img/sausages.jpg');
+	}
+
+	&:nth-child(5n){
+
+		background: $accent-gradient, url('../img/strawberries.jpg');
+	}
+
+	&:nth-child(6n){
+
+		background: $accent-gradient, url('../img/tomatoes.jpg');
 	}
 
 	.container{
@@ -689,6 +805,20 @@ nav.navbar{
 
 			margin-bottom: 10px;
 			margin-top: 0px;
+		}
+
+		a.tag{	
+
+			display: block;
+
+			text-decoration: none;
+			margin-bottom: 10px;
+			
+
+			&:hover{
+
+				color: $complement;
+			}
 		}
 
 		.review-count{
@@ -732,6 +862,14 @@ nav.navbar{
 					}
 				}
 			}
+		}
+	}
+
+	@media screen and (max-width: $tablet-breakpoint){
+
+		.container{
+
+			padding-top: 175px;
 		}
 	}
 }

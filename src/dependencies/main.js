@@ -18,7 +18,19 @@ var app = new Vue({
 		status: 'ready',
 		position: null,
 		locations: [],
-		userReady: false,
+		imageOptions: [
+
+			'../../assets/img/berries.jpg',
+			'./src/assets/img/eggs.jpg',
+			'./src/assets/img/hollandaise.jpg',
+			'./src/assets/img/omelete.jpg',
+			'./assets/img/sausages.jpg',
+			'./assets/img/strawberries.jpg',
+			'./assets/img/tomatoes.jpg'
+		],
+
+		waiting: false,
+		spinning: false,
 		locationIndex: 0
 	},
 	computed: {
@@ -52,7 +64,25 @@ var app = new Vue({
 	methods: {
 
 		prepLocations: prepLocations,
-		doSpin : function(){
+		tryDoSpin: function(){
+
+			// Check if the locations have been found yet.
+			if(this.locations.length > 0){
+
+				waiting = false;
+
+				// If they have, spin away!
+				this.doSpin();
+			}
+			else{
+
+				this.waiting = true;
+
+				// Otherwise, try again in 500 milliseconds.
+				setTimeout(this.tryDoSpin, 500);
+			}
+		},
+		doSpin: function(){
 
 			if(this.locationIndex  === 0){
 
@@ -60,21 +90,47 @@ var app = new Vue({
 			}	
 			else{
 
-				this.locationIndex = Math.floor(Math.random() * (this.locations.length - 1));
-			}
-		},
-		getLeftOffsetString : function(index){
+				var possibleIndex = Math.floor(Math.random() * (this.locations.length - 1));
 
+				// Prevent the first item from being selected (the homepage).
+				if(possibleIndex === 0){
+
+					possibleIndex = 1;
+				}
+
+				this.locationIndex = possibleIndex;
+			}
+
+			this.spinning = true;
+
+			prepReviewsForLocation(this.locations, this.locationIndex);
+
+			setTimeout(function(){
+
+				app.spinning = false;
+
+			}, 5500);
+		},
+		getLeftOffsetValue : function(index){
+
+			// Increase the index to push the content to the right of the homepage.
 			index++;
 
 			var leftPercent = index * 100;
 			var leftOffset = index * 100;
 			var leftValue = 'calc(' + leftPercent + '% + ' + (index * 100) + 'px)';
 
-			// console.log('Computing: ' + leftValue);
-			// console.log(index);
+			return { left: leftValue };
+		},
+		// TODO: Fix this.
+		getSingleBackgroundImage: function(){
 
-			return { left : leftValue };
+			var randomIndex = Math.floor(Math.random() * (this.imageOptions.length - 1));
+
+			// console.log('linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("' + this.imageOptions[randomIndex] + '")');
+			var output = 'linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url(\'' + this.imageOptions[randomIndex] + '\');';
+
+			return { background: output };
 		}
 	}
 
@@ -143,10 +199,10 @@ function findNearbyBrunchLocations(position){
 	var request = {
 
 		location: myLocation,
-		radius: '10000', // Within ~5 miles.
+		radius: '8000', // Within ~5 miles.
 		type: 'restaurant', // Restaurants only.
 		keyword: 'brunch', // Must be tagged for brunch!
-		opennow: true // Must be open now.
+		openNow: true // Must be open now.
 	}
 
 	console.log('Sending request to Google now...');
@@ -178,6 +234,22 @@ function findNearbyBrunchLocations(position){
 			console.log('There was an error with the request ' + status);
 		}
 	});
+}
+
+// Preps the reviews for a particular location.
+function prepReviewsForLocation(locations, locationIndex){
+
+	var currentLocation = locations[locationIndex];
+
+	if(!currentLocation.reviews){
+
+		var service = new google.maps.places.PlacesService(document.getElementById('gmap-attribution'));
+		service.getDetails({placeId: currentLocation.place_id}, function(response){
+
+			app.locations[locationIndex - 1].reviews = response.reviews;
+			console.log(app.locations[locationIndex - 1].reviews);
+		});
+	}
 }
 
 // Filters the results to remove any results that has a rating less than 4.0.

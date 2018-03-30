@@ -32,6 +32,9 @@
 
 html, body {
   overflow: hidden; }
+  @media screen and (max-width: 576px) {
+    html, body {
+      overflow-y: auto; } }
 
 body {
   -webkit-font-smoothing: antialiased !important;
@@ -59,6 +62,8 @@ body {
       body p.tag svg, body .p.tag svg {
         color: #FBD14B;
         margin-right: 10px; }
+    body p:first-child, body .p:first-child {
+      margin-top: 0px; }
   body a {
     color: #FFFCF0; }
     body a:hover {
@@ -76,6 +81,10 @@ body {
       font-size: 3.5rem;
       line-height: 3.5rem;
       margin-bottom: 0.3em; }
+      @media screen and (max-width: 576px) {
+        body h1.hero, body .h1.hero {
+          font-size: 2.5rem;
+          line-height: 2.75rem; } }
   body h2, body .h2 {
     font-family: "Dosis", sans-serif;
     font-size: 2rem;
@@ -177,6 +186,10 @@ body {
         box-shadow: 1px 2px 20px 0px rgba(0, 0, 0, 0.2); }
     body .button.cta-button {
       background-color: #FBD14B; }
+  @media screen and (max-width: 576px) {
+    body p.tag, body .p.tag {
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px); } }
 
 .location-widget {
   position: absolute;
@@ -195,7 +208,7 @@ body {
 
 @media screen and (max-width: 768px) {
   #main .container {
-    padding-top: 75px; }
+    padding-top: 150px; }
   .row div[class*="col"]:not(.col-sm) {
     width: 100%;
     max-width: 100%; } }
@@ -255,10 +268,14 @@ nav.navbar {
         margin-right: 25px; }
   @media screen and (max-width: 576px) {
     nav.navbar .branding span.text {
-      display: none; } }
+      display: none; }
+    nav.navbar a.button {
+      position: absolute;
+      top: 10px;
+      right: 0px; } }
 
 .dish-container {
-  overflow: scroll;
+  overflow-y: scroll;
   height: 500px; }
   .dish-container .dish-item {
     background-color: #6A60A9;
@@ -321,6 +338,9 @@ nav.navbar {
     left: calc(-100% - 100px); }
   #roulette-view.spin-2 {
     left: calc(-200% - 200px); }
+  @media screen and (max-width: 576px) {
+    #roulette-view {
+      height: 100%; } }
 
 #roulette-options .section.single {
   background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/hollandaise.jpg");
@@ -382,3 +402,16 @@ nav.navbar {
   @media screen and (max-width: 768px) {
     #roulette-options .section.single .container {
       padding-top: 175px; } }
+  @media screen and (max-width: 576px) {
+    #roulette-options .section.single {
+      height: auto; }
+      #roulette-options .section.single .container {
+        padding-top: 125px; }
+        #roulette-options .section.single .container .controls {
+          margin-top: 40px; }
+          #roulette-options .section.single .container .controls a {
+            display: block;
+            margin-bottom: 25px;
+            margin-left: 0px !important;
+            padding-left: 25px;
+            text-align: left; } }

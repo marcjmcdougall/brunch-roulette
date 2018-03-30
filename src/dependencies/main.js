@@ -18,17 +18,6 @@ var app = new Vue({
 		status: 'ready',
 		position: null,
 		locations: [],
-		imageOptions: [
-
-			'../../assets/img/berries.jpg',
-			'./src/assets/img/eggs.jpg',
-			'./src/assets/img/hollandaise.jpg',
-			'./src/assets/img/omelete.jpg',
-			'./assets/img/sausages.jpg',
-			'./assets/img/strawberries.jpg',
-			'./assets/img/tomatoes.jpg'
-		],
-
 		waiting: false,
 		spinning: false,
 		locationIndex: 0
@@ -125,12 +114,12 @@ var app = new Vue({
 		// TODO: Fix this.
 		getSingleBackgroundImage: function(){
 
-			var randomIndex = Math.floor(Math.random() * (this.imageOptions.length - 1));
+			// var randomIndex = Math.floor(Math.random() * (this.imageOptions.length - 1));
 
-			// console.log('linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("' + this.imageOptions[randomIndex] + '")');
-			var output = 'linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url(\'' + this.imageOptions[randomIndex] + '\');';
+			// // console.log('linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("' + this.imageOptions[randomIndex] + '")');
+			// var output = 'linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url(\'' + this.imageOptions[randomIndex] + '\');';
 
-			return { background: output };
+			// return { background: output };
 		}
 	}
 

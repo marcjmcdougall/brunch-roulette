@@ -1,6 +1,8 @@
 # brunch-roulette
 A simple, sexy tool that let's you find local brunch spots in a single click.
 
+**Check it out:** https://brunchroulette.com
+
 
 ***
 ### How to use...

@@ -32,7 +32,15 @@ body {
   body p, body .p {
     font-family: "Open Sans", sans-serif;
     font-size: 1.125rem;
-    line-height: 1.8; }
+    line-height: 1.8;
+    opacity: 0.8; }
+    body p.tag, body .p.tag {
+      -webkit-transform: translateX(-25px);
+      transform: translateX(-25px);
+      margin-bottom: 5px; }
+      body p.tag svg, body .p.tag svg {
+        color: #FBD14B;
+        margin-right: 10px; }
   body a {
     color: #FFFCF0; }
     body a:hover {
@@ -100,6 +108,16 @@ body {
   body .rotating {
     -webkit-animation: rotating 2s linear infinite;
     animation: rotating 2s linear infinite; }
+  body ul.stars {
+    display: inline-block;
+    vertical-align: middle;
+    list-style: none;
+    margin: 0px;
+    padding: 0px; }
+    body ul.stars li {
+      display: inline-block; }
+      body ul.stars li svg {
+        color: #FBD14B; }
   body .button {
     display: inline-block;
     min-width: 200px;
@@ -192,6 +210,18 @@ nav.navbar {
       nav.navbar ul.navigation li:not(:last-child) {
         margin-right: 25px; }
 
+.dish-container .dish-item {
+  background-color: #6A60A9;
+  padding: 25px;
+  margin-bottom: 40px;
+  border-radius: 25px;
+  opacity: 0.8; }
+  .dish-container .dish-item h3 {
+    margin-top: 0px; }
+    .dish-container .dish-item h3 svg {
+      color: #FBD14B;
+      margin-left: 10px; }
+
 #app .home {
   background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/food-mosaic-blurred.jpg");
   background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/food-mosaic-blurred.jpg");
@@ -228,16 +258,45 @@ nav.navbar {
   left: 0px;
   max-width: 100vw;
   height: 100vh;
-  -webkit-transition: left 0.5s;
-  transition: left 0.5s; }
+  -webkit-transition: left ease-in-out 5s;
+  transition: left ease-in-out 5s; }
   #roulette-view.spin {
     left: calc(-100% - 100px); }
+  #roulette-view.spin-2 {
+    left: calc(-200% - 200px); }
 
-#app .section.single {
-  background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8)));
-  background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8));
+#roulette-options .section.single {
+  background: -webkit-gradient(linear, right bottom, left top, from(rgba(106, 96, 169, 0.8)), to(rgba(206, 159, 252, 0.8))), url("../img/hollandaise.jpg");
+  background: linear-gradient(bottom right, rgba(106, 96, 169, 0.8), rgba(206, 159, 252, 0.8)), url("../img/hollandaise.jpg");
+  background-size: cover;
+  background-position: center;
   width: 100vw;
   height: 100vh;
   position: absolute;
   left: calc(100% + 100px);
   top: 0px; }
+  #roulette-options .section.single:nth-child(2) {
+    left: calc(200% + 200px); }
+  #roulette-options .section.single .container {
+    padding-top: 250px; }
+    #roulette-options .section.single .container h2.hero {
+      margin-bottom: 10px;
+      margin-top: 0px; }
+    #roulette-options .section.single .container .review-count {
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: 0px;
+      margin-bottom: 0px; }
+    #roulette-options .section.single .container .controls {
+      margin-top: 80px; }
+      #roulette-options .section.single .container .controls a {
+        text-decoration: none; }
+        #roulette-options .section.single .container .controls a svg {
+          margin-left: 0px;
+          margin-right: 5px; }
+        #roulette-options .section.single .container .controls a:not(.cta-button) {
+          margin-left: 25px;
+          opacity: 0.8; }
+          #roulette-options .section.single .container .controls a:not(.cta-button):hover {
+            color: #FFFCF0;
+            opacity: 1.0; }

@@ -17,8 +17,19 @@ var app = new Vue({
 
 		status: 'ready',
 		position: null,
-		spin: false,
 		locations: [],
+		locationIndex: 0
+	},
+	computed: {
+
+		rouletteViewOffset: function(){
+
+			var leftPercent = this.locationIndex * -100;
+			var leftOffset = this.locationIndex * 100;
+			var leftValue = 'calc(' + leftPercent + '% - ' + (this.locationIndex * 100) + 'px)';
+
+			return { left : leftValue };
+		}
 	},
 	created: function(){
 
@@ -42,7 +53,27 @@ var app = new Vue({
 		prepLocations: prepLocations,
 		doSpin : function(){
 
-			this.spin = !this.spin;
+			if(this.locationIndex  === 0){
+
+				this.locationIndex = this.locations.length - 1;
+			}	
+			else{
+
+				this.locationIndex = Math.floor(Math.random() * (this.locations.length - 1));
+			}
+		},
+		getLeftOffsetString : function(index){
+
+			index++;
+
+			var leftPercent = index * 100;
+			var leftOffset = index * 100;
+			var leftValue = 'calc(' + leftPercent + '% + ' + (index * 100) + 'px)';
+
+			console.log('Computing: ' + leftValue);
+			console.log(index);
+
+			return { left : leftValue };
 		}
 	}
 
@@ -162,5 +193,19 @@ function filterResults(results){
 	});
 
 	return output;
+}
+
+// Accepts an array, and shuffles them about.
+function shuffleResults(results) {
+
+    var j, x, i;
+
+    for (i = results.length - 1; i > 0; i--) {
+
+        j = Math.floor(Math.random() * (i + 1));
+        x = results[i];
+        results[i] = results[j];
+        results[j] = x;
+    }
 }
 

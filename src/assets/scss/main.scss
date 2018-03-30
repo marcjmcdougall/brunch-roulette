@@ -56,6 +56,8 @@ $standard-box-shadow: 1px 2px 20px 0px rgba(0, 0, 0, 0.2);
 $standard-transition-duration: 0.5s;
 $standard-transition-duration-long: 1.0s;
 
+$transition-wheel: ease-in-out 5.0s;
+
 // Baseline font and line-height.
 $baseline-font-size: 14px;
 $baseline-line-height: 1.5;  // Changed the line-height here as designers specs made it very hard to read body text.
@@ -133,6 +135,21 @@ body{
 		// Body text is slightly larger than baseline.
 		font-size: 1.125rem;
 		line-height: 1.8;
+
+		opacity: 0.8;
+
+		&.tag{
+
+			// Pop it off to the side a bit.
+			transform: translateX(-25px);
+			margin-bottom: 5px;
+
+			svg{
+
+				color: $complement;
+				margin-right: 10px;
+			}
+		}
 	}
 
 	// Styles for all links.
@@ -257,6 +274,7 @@ body{
 		max-width: 650px;
 	}
 
+	// Adds the nice yellow highlight under the text in the hero area.
 	.fancy-highlight{
 
 		position: relative;
@@ -281,9 +299,31 @@ body{
 		}
 	}
 
+	// Helper class that rotates anything with the class enabled.
 	.rotating{
 
 		animation: rotating 2s linear infinite;
+	}
+
+	// Any review element on the page.
+	ul.stars{	
+
+		display: inline-block;
+		vertical-align: middle;
+
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+
+		li{
+
+			display: inline-block;
+
+			svg{
+
+				color: $complement;
+			}
+		}
 	}
 
 
@@ -490,7 +530,35 @@ nav.navbar{
 // Component Styles
 // ==========
 
-// Coming soon.
+
+// Dish Styles
+// ==========
+.dish-container{
+
+	.dish-item{
+
+		background-color: $accent;
+
+		padding: 25px;
+		margin-bottom: 40px;
+
+		border-radius: 25px;
+
+		opacity: 0.8;
+
+		h3{
+
+			margin-top: 0px;
+
+			svg{
+
+				color: $complement;
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
 
 
 
@@ -577,11 +645,16 @@ nav.navbar{
 
 	// overflow: hidden;
 
-	transition: left $standard-transition-duration;
+	transition: left $transition-wheel;
 
 	&.spin{
 
 		left: calc(-100% - 100px);
+	}
+
+	&.spin-2{
+
+		left: calc(-200% - 200px);
 	}
 }
 
@@ -590,13 +663,75 @@ nav.navbar{
 // Single Brunch Sections
 // ==========
 
-#app .section.single{
+#roulette-options .section.single{
 
-	background: $accent-gradient;
+	background: $accent-gradient, url('../img/hollandaise.jpg');
+	background-size: cover;
+	background-position: center;
+
 	width: 100vw;
 	height: 100vh;
 
 	position: absolute;
 	left: calc(100% + 100px);
 	top: 0px;
+
+	&:nth-child(2){
+
+		left: calc(200% + 200px);
+	}
+
+	.container{
+
+		padding-top: 250px;
+
+		h2.hero{
+
+			margin-bottom: 10px;
+			margin-top: 0px;
+		}
+
+		.review-count{
+
+			display: inline-block;
+			vertical-align: middle;
+
+			margin-top: 0px;
+			margin-bottom: 0px;
+		}
+
+		.controls{
+
+			// Adds a special margin to the primary CTA on the homepage.
+			margin-top: 80px;
+
+			a{
+
+				text-decoration: none;
+
+				svg{
+
+					margin-left: 0px;
+					margin-right: 5px;
+				}
+
+				&.cta-button{
+
+				}
+
+				&:not(.cta-button){
+
+					margin-left: 25px;
+					opacity: 0.8;
+
+					&:hover{
+
+						color: $white;
+
+						opacity: 1.0;
+					}
+				}
+			}
+		}
+	}
 }

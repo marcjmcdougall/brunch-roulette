@@ -18,6 +18,7 @@ var app = new Vue({
 		status: 'ready',
 		position: null,
 		locations: [],
+		userReady: false,
 		locationIndex: 0
 	},
 	computed: {
@@ -70,8 +71,8 @@ var app = new Vue({
 			var leftOffset = index * 100;
 			var leftValue = 'calc(' + leftPercent + '% + ' + (index * 100) + 'px)';
 
-			console.log('Computing: ' + leftValue);
-			console.log(index);
+			// console.log('Computing: ' + leftValue);
+			// console.log(index);
 
 			return { left : leftValue };
 		}
